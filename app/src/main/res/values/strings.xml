@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">VolumeWidget</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+
+    <string name="main_text">Add the widget from the home screen. Volume can be toggled using
+    the volume\'s icon or adjusted using the arrows.</string>
+</resources>
