@@ -10,8 +10,6 @@ import android.media.AudioManager;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import sammyt.volumewidget.volumewidget_experimental.VolumeExpWidget;
-
 public class AdjustVolumeReceiver extends BroadcastReceiver {
 
     private final String LOG_TAG = this.getClass().getSimpleName();
@@ -38,8 +36,6 @@ public class AdjustVolumeReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
-        Log.d(LOG_TAG, "vol receiver");
 
         String volumeType = intent.getStringExtra(VOLUME_TYPE_EXTRA);
         String volumeDirection = intent.getStringExtra(VOLUME_DIRECTION);
@@ -95,17 +91,11 @@ public class AdjustVolumeReceiver extends BroadcastReceiver {
 
         audioManager.setStreamVolume(audioStream, setVolume, AudioManager.FLAG_PLAY_SOUND);
 
-        // Request an update to the App Widget
-        Intent widgetIntent = new Intent(context, VolumeWidget.class);
-        widgetIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-        int[] ids = AppWidgetManager.getInstance(context)
-                .getAppWidgetIds(new ComponentName(context, VolumeWidget.class));
-        widgetIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
-        context.sendBroadcast(widgetIntent);
+        Log.d(LOG_TAG, "Volume Type: " + audioStream + " Level: " + setVolume);
 
         // Request an update to the App Widget (ListView Collection version)
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-        int[] expIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, VolumeExpWidget.class));
+        int[] expIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, VolumeWidget.class));
         appWidgetManager.notifyAppWidgetViewDataChanged(expIds, R.id.widget_listview);
     }
 

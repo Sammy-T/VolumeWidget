@@ -1,106 +1,20 @@
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorTransparentBlack"
-    android:orientation="vertical"
-    android:gravity="center"
     android:padding="@dimen/widget_margin">
 
-    <LinearLayout
+    <ListView
+        android:id="@+id/widget_listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageButton
-            android:id="@+id/ring_toggle"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:src="@drawable/baseline_volume_up_white_24" />
-        <ImageButton
-            android:id="@+id/ring_decrease"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:src="@drawable/baseline_keyboard_arrow_down_white_24" />
-        <ProgressBar
-            android:id="@+id/ring_volume"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:padding="5dp"
-            android:layout_weight="1"
-            android:progressTint="@color/colorProgress"
-            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"/>
-        <ImageButton
-            android:id="@+id/ring_increase"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:src="@drawable/baseline_keyboard_arrow_up_white_24"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_gravity="center"/>
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageButton
-            android:id="@+id/media_toggle"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:src="@drawable/baseline_audiotrack_white_24" />
-        <ImageButton
-            android:id="@+id/media_decrease"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:src="@drawable/baseline_keyboard_arrow_down_white_24"/>
-        <ProgressBar
-            android:id="@+id/media_volume"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:padding="5dp"
-            android:layout_weight="1"
-            android:progressTint="@color/colorProgress"
-            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"/>
-        <ImageButton
-            android:id="@+id/media_increase"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:src="@drawable/baseline_keyboard_arrow_up_white_24"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageButton
-            android:id="@+id/notification_toggle"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:src="@drawable/ic_bell_white_24dp" />
-        <ImageButton
-            android:id="@+id/notification_decrease"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:src="@drawable/baseline_keyboard_arrow_down_white_24"/>
-        <ProgressBar
-            android:id="@+id/notification_volume"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:padding="5dp"
-            android:layout_weight="1"
-            android:progressTint="@color/colorProgress"
-            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"/>
-        <ImageButton
-            android:id="@+id/notification_increase"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:src="@drawable/baseline_keyboard_arrow_up_white_24"/>
-    </LinearLayout>
-
-</LinearLayout>
+        android:layout_gravity="center"
+        android:textColor="#FFF"
+        android:text="Loading..." />
+</FrameLayout>

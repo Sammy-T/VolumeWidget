@@ -9,29 +9,6 @@
         android:roundIcon="@mipmap/baseline_volume_up_white_24"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <receiver android:name=".volumewidget_experimental.VolumeExpWidget">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/volume_exp_widget_info" />
-        </receiver>
-        <service
-            android:name=".volumewidget_experimental.VolumeWidgetService"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
-
-        <service
-            android:name=".ManageObserverService"
-            android:enabled="true"
-            android:exported="false" />
-
-        <receiver
-            android:name=".AdjustVolumeReceiver"
-            android:enabled="true"
-            android:exported="false" />
-
         <receiver android:name=".VolumeWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -41,6 +18,15 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/volume_widget_info" />
         </receiver>
+
+        <service
+            android:name=".VolumeWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <receiver
+            android:name=".AdjustVolumeReceiver"
+            android:enabled="true"
+            android:exported="false" />
 
         <activity android:name=".MainActivity">
             <intent-filter>

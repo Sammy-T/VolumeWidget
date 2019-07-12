@@ -1,16 +1,12 @@
-package sammyt.volumewidget.volumewidget_experimental;
+package sammyt.volumewidget;
 
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
-import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import java.util.ArrayList;
-
-import sammyt.volumewidget.AdjustVolumeReceiver;
-import sammyt.volumewidget.R;
 
 public class VolumeWidgetService extends RemoteViewsService {
 
@@ -68,7 +64,7 @@ class VolumeRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory{
             mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
         }
 
-        RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.volume_exp_widget_item);
+        RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.volume_widget_item);
 
         // Build the views appropriately here (change images, etc)
         rv.setImageViewResource(R.id.widget_item_toggle, getImageRes(audioType));
