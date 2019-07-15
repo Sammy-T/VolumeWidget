@@ -3,6 +3,7 @@ package sammyt.volumewidget;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -57,6 +58,8 @@ class VolumeRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory{
     }
 
     public RemoteViews getViewAt(int position){
+
+        Log.d(LOG_TAG, "getViewAt " + position);
 
         int audioType = mVolumeItems.get(position);
 
@@ -116,6 +119,7 @@ class VolumeRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory{
         // from the network, etc., it is ok to do it here, synchronously. The widget will remain
         // in its current state while work is being done here, so you don't need to worry about
         // locking up the widget.
+        Log.d(LOG_TAG, "onDataSetChanged");
     }
 
     private static int getImageRes(int volumeType){
