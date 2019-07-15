@@ -1,5 +1,6 @@
 package sammyt.volumewidget;
 
+import android.app.NotificationManager;
 import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -7,8 +8,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
+import android.os.Build;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.util.Log;
+import android.widget.Toast;
 
 public class AdjustVolumeReceiver extends BroadcastReceiver {
 
@@ -28,7 +32,7 @@ public class AdjustVolumeReceiver extends BroadcastReceiver {
     public static final String VOLUME_DECREASE = "volume_decrease";
     public static final String VOLUME_TOGGLE = "volume_toggle";
 
-    private static final String MEDIA_VOL_STORE = "media_vol_store";
+    public static final String MEDIA_VOL_STORE = "media_vol_store";
     public static final String RING_VOLUME_STORE = "ring_volume_store";
     public static final String ALARM_VOLUME_STORE = "alarm_volume_store";
     public static final String NOTIFICATION_VOLUME_STORE = "notification_volume_store";
@@ -89,9 +93,27 @@ public class AdjustVolumeReceiver extends BroadcastReceiver {
                 break;
         }
 
-        audioManager.setStreamVolume(audioStream, setVolume, AudioManager.FLAG_PLAY_SOUND);
+        boolean changeVolume = true; // Default to true for non-ringer changes
 
-        Log.d(LOG_TAG, "Volume Type: " + audioStream + " Level: " + setVolume);
+        // If we're muting the ringer, check if we have the appropriate permission
+        if(audioStream == AudioManager.STREAM_RING && setVolume == 0){
+
+            changeVolume = hasDoNotDisturb(context);
+
+            if(!changeVolume){
+                String muteWarning = context.getString(R.string.mute_permission_warning);
+
+                Toast.makeText(context, muteWarning, Toast.LENGTH_SHORT).show();
+                Log.w(LOG_TAG, muteWarning);
+
+                requestDoNotDisturb(context);
+            }
+        }
+
+        if(changeVolume){
+            audioManager.setStreamVolume(audioStream, setVolume, AudioManager.FLAG_PLAY_SOUND);
+            Log.d(LOG_TAG, "Volume Type: " + audioStream + " Level: " + setVolume);
+        }
 
         // Request an update to the App Widget (ListView Collection version)
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
@@ -144,5 +166,24 @@ public class AdjustVolumeReceiver extends BroadcastReceiver {
         }
 
         return toggledVolume;
+    }
+
+    // Returns whether or not we have permission to mute the ringer
+    private boolean hasDoNotDisturb(Context context){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            NotificationManager notifyManager = (NotificationManager) context
+                    .getSystemService(Context.NOTIFICATION_SERVICE);
+
+            return notifyManager.isNotificationPolicyAccessGranted();
+        }else{
+            return true; // default to true if the API level is too low for this permission request
+        }
+    }
+
+    private void requestDoNotDisturb(Context context){
+        Intent requestIntent = new Intent();
+        requestIntent.setAction(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+
+        context.startActivity(requestIntent);
     }
 }
