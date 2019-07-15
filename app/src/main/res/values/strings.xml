@@ -5,4 +5,6 @@
 
     <string name="main_text">Add the widget from the home screen. Volume can be toggled using
     the volume\'s icon or adjusted using the arrows.</string>
+
+    <string name="mute_permission_warning">Permission not granted. Unable to mute.</string>
 </resources>
