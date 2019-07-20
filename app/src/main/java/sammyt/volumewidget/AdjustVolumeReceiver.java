@@ -183,6 +183,7 @@ public class AdjustVolumeReceiver extends BroadcastReceiver {
     private void requestDoNotDisturb(Context context){
         Intent requestIntent = new Intent();
         requestIntent.setAction(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+        requestIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         context.startActivity(requestIntent);
     }
