@@ -95,8 +95,9 @@ public class AdjustVolumeReceiver extends BroadcastReceiver {
 
         boolean changeVolume = true; // Default to true for non-ringer changes
 
-        // If we're muting the ringer, check if we have the appropriate permission
-        if(audioStream == AudioManager.STREAM_RING && setVolume == 0){
+        // If we're muting the ringer or notification, check if we have the appropriate permission
+        if((audioStream == AudioManager.STREAM_RING && setVolume == 0) ||
+                (audioStream == AudioManager.STREAM_NOTIFICATION && setVolume == 0)){
 
             changeVolume = hasDoNotDisturb(context);
 
@@ -170,7 +171,7 @@ public class AdjustVolumeReceiver extends BroadcastReceiver {
 
     // Returns whether or not we have permission to mute the ringer
     private boolean hasDoNotDisturb(Context context){
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){ // API level 23+
             NotificationManager notifyManager = (NotificationManager) context
                     .getSystemService(Context.NOTIFICATION_SERVICE);
 
