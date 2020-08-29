@@ -97,7 +97,9 @@ public class AdjustVolumeReceiver extends BroadcastReceiver {
 
         // If we're muting the ringer or notification, check if we have the appropriate permission
         if((audioStream == AudioManager.STREAM_RING && setVolume == 0) ||
-                (audioStream == AudioManager.STREAM_NOTIFICATION && setVolume == 0)){
+                (audioStream == AudioManager.STREAM_RING && currentVolume == 0) ||
+                (audioStream == AudioManager.STREAM_NOTIFICATION && setVolume == 0) ||
+                (audioStream == AudioManager.STREAM_NOTIFICATION && currentVolume == 0)){
 
             changeVolume = hasDoNotDisturb(context);
 
