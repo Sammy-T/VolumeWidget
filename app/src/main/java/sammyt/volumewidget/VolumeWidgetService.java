@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class VolumeWidgetService extends RemoteViewsService {
 
-    private final String LOG_TAG = this.getClass().getSimpleName();
+    private static final String LOG_TAG = VolumeWidgetService.class.getSimpleName();
 
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent){
@@ -21,7 +21,7 @@ public class VolumeWidgetService extends RemoteViewsService {
 
 class VolumeRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory{
 
-    private final String LOG_TAG = this.getClass().getSimpleName();
+    private static final String LOG_TAG = VolumeRemoteViewsFactory.class.getSimpleName();
 
     private Context mContext;
     private static AudioManager mAudioManager;
@@ -37,19 +37,18 @@ class VolumeRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory{
         mContext = context;
     }
 
+    // In onCreate() you setup any connections / cursors to your data source. Heavy lifting,
+    // for example downloading or creating content etc, should be deferred to onDataSetChanged()
+    // or getViewAt(). Taking more than 20 seconds in this call will result in an ANR.
     public void onCreate(){
-        // In onCreate() you setup any connections / cursors to your data source. Heavy lifting,
-        // for example downloading or creating content etc, should be deferred to onDataSetChanged()
-        // or getViewAt(). Taking more than 20 seconds in this call will result in an ANR.
-
         mVolumeItems.add(RING_VOLUME);
         mVolumeItems.add(MEDIA_VOLUME);
         mVolumeItems.add(NOTIFICATION_VOLUME);
     }
 
+    // In onDestroy() you should tear down anything that was setup for your data source,
+    // eg. cursors, connections, etc.
     public void onDestroy() {
-        // In onDestroy() you should tear down anything that was setup for your data source,
-        // eg. cursors, connections, etc.
         mVolumeItems.clear();
     }
 
@@ -58,7 +57,6 @@ class VolumeRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory{
     }
 
     public RemoteViews getViewAt(int position){
-
         Log.d(LOG_TAG, "getViewAt " + position);
 
         int audioType = mVolumeItems.get(position);
@@ -94,9 +92,9 @@ class VolumeRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory{
         return rv;
     }
 
+    // You can create a custom loading view (for instance when getViewAt() is slow.) If you
+    // return null here, you will get the default loading view.
     public RemoteViews getLoadingView() {
-        // You can create a custom loading view (for instance when getViewAt() is slow.) If you
-        // return null here, you will get the default loading view.
         return null;
     }
 
@@ -112,18 +110,17 @@ class VolumeRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory{
         return true;
     }
 
+    // This is triggered when you call AppWidgetManager notifyAppWidgetViewDataChanged
+    // on the collection view corresponding to this factory. You can do heaving lifting in
+    // here, synchronously. For example, if you need to process an image, fetch something
+    // from the network, etc., it is ok to do it here, synchronously. The widget will remain
+    // in its current state while work is being done here, so you don't need to worry about
+    // locking up the widget.
     public void onDataSetChanged() {
-        // This is triggered when you call AppWidgetManager notifyAppWidgetViewDataChanged
-        // on the collection view corresponding to this factory. You can do heaving lifting in
-        // here, synchronously. For example, if you need to process an image, fetch something
-        // from the network, etc., it is ok to do it here, synchronously. The widget will remain
-        // in its current state while work is being done here, so you don't need to worry about
-        // locking up the widget.
         Log.d(LOG_TAG, "onDataSetChanged");
     }
 
     private static int getImageRes(int volumeType){
-
         int currentVolume = getStreamValue(volumeType);
         int res = R.drawable.baseline_keyboard_arrow_down_white_24;
 

@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 public class AdjustVolumeReceiver extends BroadcastReceiver {
 
-    private final String LOG_TAG = this.getClass().getSimpleName();
+    private static final String LOG_TAG = AdjustVolumeReceiver.class.getSimpleName();
 
     public static final String VOLUME_TYPE_EXTRA = "volume_type_extra";
 
@@ -40,7 +40,6 @@ public class AdjustVolumeReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
         String volumeType = intent.getStringExtra(VOLUME_TYPE_EXTRA);
         String volumeDirection = intent.getStringExtra(VOLUME_DIRECTION);
 
@@ -125,7 +124,6 @@ public class AdjustVolumeReceiver extends BroadcastReceiver {
     }
 
     private int toggleVolume(Context context, String volumeType, int maxVolume, int currentVolume){
-
         int toggledVolume;
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);

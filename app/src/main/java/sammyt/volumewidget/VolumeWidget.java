@@ -13,7 +13,7 @@ import android.widget.RemoteViews;
  */
 public class VolumeWidget extends AppWidgetProvider {
 
-    private final String LOG_TAG = this.getClass().getSimpleName();
+    private static final String LOG_TAG = VolumeWidget.class.getSimpleName();
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
