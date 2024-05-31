@@ -42,7 +42,7 @@ public class VolumeWidget extends AppWidgetProvider {
         // Set up the Pending Intent template
         Intent volumeIntent = new Intent(context, AdjustVolumeReceiver.class);
         PendingIntent volumePendingIntent = PendingIntent.getBroadcast(context, 71019,
-                volumeIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                volumeIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
 
         views.setPendingIntentTemplate(R.id.widget_listview, volumePendingIntent);
 
