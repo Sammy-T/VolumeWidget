@@ -17,7 +17,7 @@ public class VolumeReceiverTest {
 
     private final String LOG_TAG = this.getClass().getSimpleName();
 
-    private Context appContext = InstrumentationRegistry.getTargetContext();
+    private Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
     @Test
     public void testMediaVolumeDecrease() {
