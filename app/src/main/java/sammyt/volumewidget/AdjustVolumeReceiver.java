@@ -43,6 +43,11 @@ public class AdjustVolumeReceiver extends BroadcastReceiver {
         String volumeType = intent.getStringExtra(VOLUME_TYPE_EXTRA);
         String volumeDirection = intent.getStringExtra(VOLUME_DIRECTION);
 
+        if(volumeType == null || volumeDirection == null) {
+            Log.e(LOG_TAG, "Missing intent extras");
+            return;
+        }
+
         AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 
         int audioStream = 3;
