@@ -59,7 +59,6 @@ gen-external-apklibs
 bin/
 gen/
 out/
-release/
 
 # Gradle files
 .gradle
@@ -88,7 +87,7 @@ proguard/
 # Keystore files
 
 # Google Services (e.g. APIs or Firebase)
-# google-services.json
+google-services.json
 
 # Android Patch
 
@@ -166,3 +165,11 @@ fabric.properties
 !/gradle/wrapper/gradle-wrapper.jar
 
 # End of https://www.toptal.com/developers/gitignore/api/androidstudio,android
+
+
+
+# Release files
+release/
+
+# Output metadata
+output-metadata.*
