@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 30
+    compileSdk 34
     defaultConfig {
         applicationId "sammyt.volumewidget"
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 34
         versionCode 8
         versionName "1.43"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
