@@ -156,7 +156,7 @@ class VolumeRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory{
 
         switch(volumeType){
             case MEDIA_VOLUME:
-                stream = AudioManager.STREAM_MUSIC;
+//                stream = AudioManager.STREAM_MUSIC;
                 break;
             case RING_VOLUME:
                 stream = AudioManager.STREAM_RING;
@@ -179,7 +179,7 @@ class VolumeRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory{
 
         switch(volumeType){
             case MEDIA_VOLUME:
-                stream = AudioManager.STREAM_MUSIC;
+//                stream = AudioManager.STREAM_MUSIC;
                 break;
             case RING_VOLUME:
                 stream = AudioManager.STREAM_RING;

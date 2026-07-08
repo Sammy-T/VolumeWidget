@@ -50,11 +50,11 @@ public class AdjustVolumeReceiver extends BroadcastReceiver {
 
         AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 
-        int audioStream = 3;
+        int audioStream = AudioManager.STREAM_MUSIC;
 
         switch(volumeType){
             case MEDIA_VOLUME:
-                audioStream = AudioManager.STREAM_MUSIC;
+//                audioStream = AudioManager.STREAM_MUSIC;
                 break;
             case RING_VOLUME:
                 audioStream = AudioManager.STREAM_RING;
